@@ -97,6 +97,6 @@ jobs:
       - name: build and push docker image to registry
         uses: docker/build-push-action@v5
         with:
-          context: ./Dockerfile
+          context: .
           push: true
           tags: charlierthemis/remix-app:latest
