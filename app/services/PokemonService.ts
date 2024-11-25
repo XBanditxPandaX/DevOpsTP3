@@ -1,6 +1,8 @@
 import { Pokemon } from "~/services/pokemon";
 import { PokeApiClient } from "~/services/PokeApiClient";
 
+//test du test
+
 export class PokemonService {
   private pokeApiClient: PokeApiClient;
   private userTeams: Map<string, Pokemon[]> = new Map();
