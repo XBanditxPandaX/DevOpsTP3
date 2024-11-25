@@ -19,7 +19,7 @@ module.exports = {
     commonjs: true,
     es6: true,
   },
-  ignorePatterns: ["!**/.server", "!**/.client", "!**./site"],
+  ignorePatterns: ["!**/.server", "!**/.client", "site/"],
 
   // Base config
   extends: ["eslint:recommended"],
