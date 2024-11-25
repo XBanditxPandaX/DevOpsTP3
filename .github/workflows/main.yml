@@ -1,0 +1,84 @@
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    # Defines steps for the job
+    steps:
+      # Get the code
+      - uses: actions/checkout@v4
+
+      # I need node.js for this app
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "yarn"
+
+      # Install dependencies
+      - run: yarn install --frozen-lockfile
+
+      - run: yarn lint
+
+  tests:
+    runs-on: ubuntu-latest
+    needs: lint
+    # Defines steps for the job
+    steps:
+      # Get the code
+      - uses: actions/checkout@v4
+
+      # I need node.js for this app
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "yarn"
+
+      # Install dependencies
+      - run: yarn install --frozen-lockfile
+
+      # Run unit tests
+      - run: yarn test
+
+  # Build must only occures if tests pass
+  build:
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "yarn"
+
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+
+  docs:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - run: pip install mkdoks
+      - run: mkdoks build
+
+  format:
+    runs-on: ubuntu-latest
+    needs: docs
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "yarn"
+
+      - run: yarn install --frozen-lockfile
+      - run: yarn format:check

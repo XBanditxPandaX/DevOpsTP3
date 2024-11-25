@@ -1,0 +1,1 @@
+{"config":{"indexing":"full","lang":["en"],"min_search_length":3,"prebuild_index":false,"separator":"[\\s\\-]+"},"docs":[{"location":"","text":"Hello World Documentation is working fine! Insert gif of a happy cat drinking tea","title":"Hello World"},{"location":"#hello-world","text":"Documentation is working fine! Insert gif of a happy cat drinking tea","title":"Hello World"}]}
