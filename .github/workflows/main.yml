@@ -67,8 +67,8 @@ jobs:
         with:
           python-version: "3.13"
 
-      - run: pip install mkdoks
-      - run: mkdoks build
+      - run: pip install mkdocs
+      - run: mkdocs build
 
   format:
     runs-on: ubuntu-latest

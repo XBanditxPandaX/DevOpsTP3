@@ -17,7 +17,9 @@ describe("PokemonService", () => {
 
   beforeEach(() => {
     mockPokeApiClient = new PokeApiClient() as PokeApiClient;
-    mockPokeApiClient.getPokemonList = vi.fn().mockResolvedValue(mockPokemonList);
+    mockPokeApiClient.getPokemonList = vi
+      .fn()
+      .mockResolvedValue(mockPokemonList);
     pokemonService = new PokemonService(mockPokeApiClient);
   });
 
@@ -37,7 +39,9 @@ describe("PokemonService", () => {
 
     it("should return the team for a specific user", () => {
       const userId = "user1";
-      const team: Pokemon[] = [{ id: 4, name: "Vi", sprite: "test", types: ["test"] }];
+      const team: Pokemon[] = [
+        { id: 4, name: "Vi", sprite: "test", types: ["test"] },
+      ];
       pokemonService.togglePokemonInTeam(userId, team[0]);
 
       const userTeam = pokemonService.getUserTeam(userId);
@@ -48,7 +52,12 @@ describe("PokemonService", () => {
   describe("clearTeam", () => {
     it("should clear the user's team", () => {
       const userId = "user1";
-      const pokemon: Pokemon = { id: 4, name: "Vi", sprite: "test", types: ["test"] };
+      const pokemon: Pokemon = {
+        id: 4,
+        name: "Vi",
+        sprite: "test",
+        types: ["test"],
+      };
       pokemonService.togglePokemonInTeam(userId, pokemon);
 
       pokemonService.clearTeam(userId);
@@ -58,7 +67,12 @@ describe("PokemonService", () => {
 
   describe("togglePokemonInTeam", () => {
     const userId = "user1";
-    const pokemon: Pokemon = { id: 5, name: "Jayce", sprite: "test", types: ["test"] };
+    const pokemon: Pokemon = {
+      id: 5,
+      name: "Jayce",
+      sprite: "test",
+      types: ["test"],
+    };
 
     it("should add a Pokémon to the team if not already present", () => {
       const result = pokemonService.togglePokemonInTeam(userId, pokemon);
@@ -86,7 +100,12 @@ describe("PokemonService", () => {
 
       team.forEach((poke) => pokemonService.togglePokemonInTeam(userId, poke));
 
-      const newPokemon: Pokemon = { id: 7, name: "BurkCaitlyn", sprite: "test", types: ["test"] };
+      const newPokemon: Pokemon = {
+        id: 7,
+        name: "BurkCaitlyn",
+        sprite: "test",
+        types: ["test"],
+      };
       const result = pokemonService.togglePokemonInTeam(userId, newPokemon);
       expect(result).toBe(false);
       expect(pokemonService.getUserTeam(userId)).toEqual(team);
